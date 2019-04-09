@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+    <h:head></h:head>
+
+    <h:body>
+        <div style="width: 50%; float: left;">
+            <p:fieldset legend="All libraries">
+                <p:dataTable value="#{libraryControllerJPA.libraries}" var="library">
+                    <p:column headerText="Library">
+                        <h:outputText value="#{library.id} #{library.name}" />
+                    </p:column>
+                    <p:column headerText="Books of the library">
+                        <ui:repeat var="book" value="#{library.books}">
+                            <h:outputText value="Book ID: #{book.id} " />
+                            <span>
+                                (Product IDs:
+                                <ui:repeat var="author" value="#{author.books}">
+                                    <h:outputText value=" #{author.id}" />
+                                </ui:repeat>
+                                )
+                            </span>
+                            <br/>
+                        </ui:repeat>
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+        </div>
+        <br/>
+        <h:form>
+            <h2>Create a new book for a new library</h2>
+            <table>
+                <tr>
+                    <td>
+                        <h:panelGrid columns="1">
+                            <p:outputLabel for="name" value="Library name"/>
+                            <p:inputText id="name" value="#{libraryControllerJPA.library.name}"/>
+                            <p:message for="name"/>
+                        </h:panelGrid>
+                    </td>
+                </tr>
+            </table>
+
+            <p:commandButton value="Create"
+                             actionListener="#{libraryControllerJPA.createLibraryWithBook()}"
+                             action="shop-jpa?faces-redirect=true"
+                             ajax="false"/>
+        </h:form>
+    </h:body>
+</html>
+

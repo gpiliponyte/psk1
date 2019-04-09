@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+    <h:head></h:head>
+
+    <h:body>
+        <div style="width: 50%; float: left;">
+            <p:fieldset legend="All users">
+                <p:dataTable value="#{shopControllerMyBatis.users}" var="user">
+                    <p:column headerText="User">
+                        <h:outputText value="#{user.id} #{user.name}" />
+                    </p:column>
+                    <p:column headerText="Orders of the user">
+                        <ui:repeat var="order" value="#{user.orders}">
+                            <h:outputText value="Order ID: #{order.id} " />
+                            <br/>
+                        </ui:repeat>
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+        </div>
+        <br/>
+        <h:form>
+            <h2>Create a new order for a new user</h2>
+            <table>
+                <tr>
+                    <td>
+                        <h:panelGrid columns="1">
+                            <p:outputLabel for="name" value="User name"/>
+                            <p:inputText id="name" value="#{shopControllerMyBatis.user.name}"/>
+                            <p:message for="name"/>
+                        </h:panelGrid>
+                    </td>
+                </tr>
+            </table>
+
+            <p:commandButton value="Create"
+                             actionListener="#{shopControllerMyBatis.createUserWithOrder()}"
+                             action="shop-mybatis?faces-redirect=true"
+                             ajax="false"/>
+        </h:form>
+    </h:body>
+</html>
+
