@@ -9,7 +9,6 @@
 /usr/src/mymaven/src/main/java/lt/vu/usecases/cdi/MyBatisResources.java
 /usr/src/mymaven/src/main/java/lt/vu/usecases/dao/LibraryDAO.java
 /usr/src/mymaven/src/main/java/lt/vu/usecases/mybatis/model/BookAuthor.java
-/usr/src/mymaven/src/main/java/lt/vu/usecases/cdi/RescueOrAsync.java
 /usr/src/mymaven/src/main/java/lt/vu/entities/Library.java
 /usr/src/mymaven/src/main/java/lt/vu/usecases/mybatis/dao/LibraryMapper.java
 /usr/src/mymaven/src/main/java/lt/vu/usecases/controllers/LibraryControllerMyBatis.java

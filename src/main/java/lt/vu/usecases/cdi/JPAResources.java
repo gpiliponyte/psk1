@@ -24,6 +24,7 @@ public class JPAResources {
         return emf.createEntityManager(SynchronizationType.SYNCHRONIZED);
     }
 
+
     private void closeDefaultEntityManager(@Disposes @Default EntityManager em) {
         em.close();
     }

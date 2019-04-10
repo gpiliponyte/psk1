@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Model // tas pats kaip: @Named ir @RequestScoped
+@Model
 public class LibraryControllerJPA {
     @Getter
     private List<Library> libraries;
