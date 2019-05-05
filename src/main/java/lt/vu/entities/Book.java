@@ -3,6 +3,7 @@ package lt.vu.entities;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.johnzon.mapper.JohnzonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -31,4 +32,9 @@ public class Book implements Serializable {
     )
     @ManyToMany
     private List<Author> authors = new ArrayList<>();
+
+    @Version
+    @Column(name = "opt_lock_version")
+    @JohnzonIgnore // kad reste neatsirastu
+    private Integer optLockVersion;
 }

@@ -19,4 +19,13 @@ public class LibraryDAO {
     public void create(Library library) {
         em.persist(library);
     }
+
+    public void updateAndFlush(Library library) {
+        em.merge(library);
+        em.flush();
+    }
+
+    public Library findById(Integer id) {
+        return em.find(Library.class, id);
+    }
 }

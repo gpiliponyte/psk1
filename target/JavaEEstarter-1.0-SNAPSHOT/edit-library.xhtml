@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:head>
+    <title>Edit Library with Optimistic Locking</title>
+</h:head>
+
+<h:body>
+    <h:form id="form">
+
+        <p:fieldset id="list" style="width: 50%">
+            <f:facet name="legend">
+                All libraries
+                <p:commandButton value="Refresh" icon="ui-icon-arrowrefresh-1-e"
+                                 actionListener="#{editLibraryController.reloadAll}"
+                                 update=":form:list"/>
+            </f:facet>
+
+            <p:dataTable value="#{editLibraryController.allLibraries}" var="library" tableStyle="table-layout: auto">
+                <p:column headerText="Library">
+                    #{library.name}
+                </p:column>
+                <p:column>
+                    <p:commandButton value="Edit" icon="ui-icon-pencil"
+                                     actionListener="#{editLibraryController.prepareForEditing(library)}"
+                                     update=":form:libraryDetail"
+                                     oncomplete="PF('libraryDialog').show()" />
+                </p:column>
+            </p:dataTable>
+        </p:fieldset>
+
+        <p:dialog header="Edit Library" widgetVar="libraryDialog" modal="true" closable="true" resizable="false" closeOnEscape="true">
+            <p:outputPanel id="libraryDetail">
+                <h:outputText value="No library was selected... Weird..." rendered="#{empty editFirmController.selectedLibrary}" />
+                <p:panelGrid  columns="3" rendered="#{not empty editLibraryController.selectedLibrary}"
+                              columnClasses="label,value" styleClass="ui-noborder">
+                    <p:outputLabel for="name" value="Name:"/>
+                    <p:inputText id="name" value="#{editLibraryController.selectedLibrary.name}"/>
+                    <p:message for="name"/>
+
+                    <h:outputText value="Opt. version:" />
+                    <h:outputText value="#{editLibraryController.selectedLibrary.optLockVersion}" style="font-weight: bold"/>
+                </p:panelGrid>
+
+                <p:commandButton value="Update" actionListener="#{editLibraryController.updateSelectedLibrary}"
+                                 rendered="#{empty editLibraryController.conflictingLibrary}"
+                                 icon="ui-icon-check" style="margin-top: 1em"
+                                 update=":form:libraryDetail :form:list"
+                                 oncomplete="if (args &amp;&amp; !args.validationFailed) PF('libraryDialog').hide()" />
+
+                <p:panelGrid  columns="2" rendered="#{not empty editLibraryController.conflictingLibrary}"
+                              columnClasses="label,value" styleClass="ui-noborder" style="margin-top: 1em">
+                    <f:facet name="header">Conflicting library</f:facet>
+
+                    <h:outputText value="Name:"/>
+                    <h:outputText value="#{editLibraryController.conflictingLibrary.name}"/>
+
+                    <h:outputText value="Opt. version:" />
+                    <h:outputText value="#{editLibraryController.conflictingLibrary.optLockVersion}" style="font-weight: bold"/>
+                </p:panelGrid>
+
+                <p:commandButton value="Overwrite" actionListener="#{editLibraryController.overwriteLibrary}"
+                                 rendered="#{not empty editLibraryController.conflictingLibrary}"
+                                 icon="ui-icon-notice" style="margin-top: 1em"
+                                 update=":form:libraryDetail :form:list"
+                                 oncomplete="if (args &amp;&amp; !args.validationFailed) PF('libraryDialog').hide()" />
+            </p:outputPanel>
+        </p:dialog>
+
+        <p:messages globalOnly="true"/>
+    </h:form>
+
+</h:body>
+</html>

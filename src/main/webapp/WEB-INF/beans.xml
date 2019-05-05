@@ -8,5 +8,14 @@
 
     <alternatives>
         <class>org.apache.deltaspike.jpa.impl.transaction.ContainerManagedTransactionStrategy</class>
+        <class>lt.vu.usecases.rest.LibraryRestServiceAlternative</class>
     </alternatives>
+
+    <interceptors>
+        <class>lt.vu.usecases.interceptors.CustomInterceptorImplementation</class>
+    </interceptors>
+
+    <decorators>
+    <class>lt.vu.usecases.decorators.AsyncComponentDecorator</class>
+    </decorators>
 </beans>
