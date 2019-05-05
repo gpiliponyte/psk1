@@ -12,13 +12,13 @@ public class AsyncComponent implements AsyncInterface, Serializable {
 
     @Futureable
     public Future<String> asyncMethod() {
-        System.out.println("Starts working on a really big task, like, really ...");
+        System.out.println("Just working on a large task");
         try {
-            Thread.sleep(10000); // sleep for 10 seconds
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
-            // noop
+            System.out.println("Oh no, an exception occurred");
         }
-        System.out.println("Big task completed. Or is it?");
+        System.out.println("Large task complete");
         return new AsyncResult<>("BIG result");
     }
 }

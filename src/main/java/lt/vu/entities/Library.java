@@ -31,7 +31,7 @@ public class Library implements Serializable {
     @OneToMany(mappedBy = "library")
     private List<Book> books = new ArrayList<>();
 
-    @Version
+    @Version // Corresponding field (to OLV) of JPA entity must be marked with @Version
     @Column(name = "opt_lock_version")
     @JohnzonIgnore // kad reste neatsirastu
     private Integer optLockVersion;

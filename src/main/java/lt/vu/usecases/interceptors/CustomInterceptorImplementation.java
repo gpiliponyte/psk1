@@ -3,10 +3,11 @@ package lt.vu.usecases.interceptors;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
+import java.io.Serializable;
 
 @CustomInterceptor
 @Interceptor // both pof these means kad cia implementacija
-public class CustomInterceptorImplementation {
+public class CustomInterceptorImplementation implements Serializable {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
         System.out.println("Interceptor called");

@@ -35,7 +35,7 @@
 
         <p:dialog header="Edit Library" widgetVar="libraryDialog" modal="true" closable="true" resizable="false" closeOnEscape="true">
             <p:outputPanel id="libraryDetail">
-                <h:outputText value="No library was selected... Weird..." rendered="#{empty editFirmController.selectedLibrary}" />
+                <h:outputText value="No library was selected" rendered="#{empty editFirmController.selectedLibrary}" />
                 <p:panelGrid  columns="3" rendered="#{not empty editLibraryController.selectedLibrary}"
                               columnClasses="label,value" styleClass="ui-noborder">
                     <p:outputLabel for="name" value="Name:"/>

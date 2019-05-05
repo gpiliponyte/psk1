@@ -1,6 +1,7 @@
 package lt.vu.usecases.rest;
 
 import lt.vu.entities.Library;
+import lt.vu.usecases.interceptors.CustomInterceptor;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Alternative;
@@ -12,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-//@MyInterceptor
+@CustomInterceptor
 @Alternative
 @ApplicationScoped
 @Path("/rest")

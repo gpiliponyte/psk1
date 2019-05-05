@@ -30,12 +30,12 @@ public class AsyncController implements Serializable {
     public void callAsyncMethod() throws ExecutionException, InterruptedException {
         if (resultInFuture == null) {
             resultInFuture = asyncComponent.asyncMethod();
-            resultString = "Result is ready? " + resultInFuture.isDone(); // ar promise isresolvintas
+            resultString = "Is it done yet? " + resultInFuture.isDone(); // ar promise isresolvintas
         } else {
             if (resultInFuture.isDone()) {
                 String result = resultInFuture.get();
                 resultInFuture = null;
-                resultString = "Result is finally ready, and it is: " + result;
+                resultString = "Result: " + result;
             } else {
                 resultString = "Result is not yet ready... please wait a moment...";
             }

@@ -15,10 +15,10 @@ import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
-@Named
-@ViewScoped
-@Slf4j
-public class EditLibraryController implements Serializable {
+@Named // @Named instead of Spring’s @Component to declare a bean.
+@ViewScoped // A @ViewScoped bean lives exactly as long as a JSF view.
+@Slf4j // SLF4J is a simple facade for logging systems allowing the end-user to plug-in the desired logging system at deployment time.
+public class EditLibraryController implements Serializable { // Serializable no methods just indicates that serializable
     @Getter
     private Library selectedLibrary;
     @Getter
@@ -26,10 +26,10 @@ public class EditLibraryController implements Serializable {
     @Getter
     private List<Library> allLibraries;
 
-    @Inject
+    @Inject // Identifies injectable constructors, methods, and fields.
     private LibraryDAO libraryDAO;
 
-    @PostConstruct
+    @PostConstruct // In the @PostConstruct method the bean is fully initialized and you can use the dependencies.
     public void init() {
         reloadAll();
     }
@@ -39,7 +39,7 @@ public class EditLibraryController implements Serializable {
         conflictingLibrary = null;
     }
 
-    @Transactional
+    @Transactional // deal with db
     public void updateSelectedLibrary() {
         try {
             libraryDAO.updateAndFlush(selectedLibrary);
